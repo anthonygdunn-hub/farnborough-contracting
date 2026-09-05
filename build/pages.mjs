@@ -271,12 +271,18 @@ export const homeFaqsExport = [
 /* Shared cards                                                             */
 /* ======================================================================== */
 function projCard(p) {
-  return `<article class="proj" data-cat="${esc(p.category)}">
-  <div class="proj-media">
+  // A card with no photograph should look like a deliberate case note, not a
+  // broken image. The media box only appears when there is actually an image.
+  const media = p.image_url
+    ? `<div class="proj-media">
     <span class="proj-tag">${esc(p.category)}</span>
-    <span class="ph">Photograph to follow</span>
-  </div>
+    <img src="${esc(p.image_url)}" alt="${esc(p.title)}" loading="lazy" width="800" height="600">
+  </div>`
+    : "";
+  return `<article class="proj${p.image_url ? "" : " proj-text"}" data-cat="${esc(p.category)}">
+  ${media}
   <div class="proj-body">
+    ${p.image_url ? "" : `<span class="proj-cat">${esc(p.category)}</span>`}
     <h3>${esc(p.title)}</h3>
     <p>${esc(p.detail)}</p>
     <div class="proj-meta"><span>${icon("pin")} <b>${esc(p.location)}</b></span><span>${esc(p.duration)}</span></div>
