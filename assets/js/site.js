@@ -344,13 +344,17 @@
         if (res.error || !res.data || !res.data.length) return;
         host.innerHTML = res.data
           .map(function (p) {
-            var media = p.image_url
-              ? '<img src="' + p.image_url + '" alt="' + (p.title || "").replace(/"/g, "&quot;") + '" loading="lazy" width="800" height="600">'
-              : '<span class="ph">Photograph to follow</span>';
+            var hasImg = !!p.image_url;
+            var media = hasImg
+              ? '<div class="proj-media"><span class="proj-tag">' + (p.category || "") + '</span>' +
+                '<img src="' + p.image_url + '" alt="' + (p.title || "").replace(/"/g, "&quot;") + '" loading="lazy" width="800" height="600"></div>'
+              : "";
             return (
-              '<article class="proj" data-cat="' + (p.category || "") + '">' +
-              '<div class="proj-media"><span class="proj-tag">' + (p.category || "") + "</span>" + media + "</div>" +
-              '<div class="proj-body"><h3>' + (p.title || "") + "</h3>" +
+              '<article class="proj' + (hasImg ? "" : " proj-text") + '" data-cat="' + (p.category || "") + '">' +
+              media +
+              '<div class="proj-body">' +
+              (hasImg ? "" : '<span class="proj-cat">' + (p.category || "") + "</span>") +
+              "<h3>" + (p.title || "") + "</h3>" +
               "<p>" + (p.detail || "") + "</p>" +
               '<div class="proj-meta"><span><b>' + (p.location || "") + "</b></span><span>" + (p.duration || "") + "</span></div>" +
               "</div></article>"
