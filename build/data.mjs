@@ -946,21 +946,66 @@ export const reviews = [
 ];
 
 /* --- Projects ------------------------------------------------------------
-   Fallback content only. The live site reads these from Supabase so they
-   can be added without a code change. CONFIRM and replace with real jobs
-   and real photographs, which is the single biggest win available: no
-   local competitor publishes before and after work.
+   These are the seven real jobs listed on farnboroughcontracting.co.uk,
+   with that site's own descriptions. Four are council contracts, which is
+   the strongest credibility signal the business has and was not being used
+   anywhere on the old .com site.
+
+   Photographs exist on the .co.uk site at
+   /img/recent-projects/<slug>/img/<slug>-NN.jpg but could not be copied
+   across automatically. Add image_url to a row in Supabase, or drop files
+   into assets/img/work/ and set image_url to /assets/img/work/<file>.
    ------------------------------------------------------------------------ */
 export const projects = [
-  { title: "Collapsed clay drain replaced under a driveway", category: "Drain repairs", location: "Farnborough, GU14", duration: "2 days", detail: "Camera found a fully collapsed section under block paving. Paving lifted, pipe replaced in clay, blocks relaid so the repair is invisible." },
-  { title: "Root ingress cut out and full length lining", category: "Drain repairs", location: "Aldershot, GU11", duration: "1 day", detail: "Roots through three joints in a Victorian clay run. Cut out, descaled and lined end to end with no ground broken." },
-  { title: "Permeable block paved driveway", category: "Driveways", location: "Fleet, GU51", duration: "4 days", detail: "Old concrete broken out and taken away, dug to 250mm, Type 3 sub-base, permeable blocks. No planning application needed." },
-  { title: "Soakaway sized on a percolation test", category: "Drainage", location: "Cove, GU14", duration: "1 day", detail: "Previous soakaway flooded every winter. Trial pit dug, ground tested, replacement sized correctly and connected to the downpipes." },
-  { title: "Dropped kerb and vehicle crossing", category: "Dropped kerbs", location: "Farnborough, GU14", duration: "2 days", detail: "Hampshire application, Section 171 licence, kerbs lowered and footway reinstated to specification, then the driveway behind it." },
-  { title: "Pre-purchase CCTV survey", category: "Surveys", location: "Camberley, GU15", duration: "2 hours", detail: "1970s property on pitch fibre. Deformation found and reported, and the buyer renegotiated on the strength of the footage." },
-  { title: "Concrete base for a garden room", category: "Groundworks", location: "Farnham, GU9", duration: "3 days", detail: "Site cleared, reinforced base laid to level, and the existing drain run traced and protected before excavation." },
-  { title: "Extension footings over an existing sewer", category: "Groundworks", location: "Fleet, GU52", duration: "5 days", detail: "Drain located and camera surveyed first, build-over agreement identified, footings and drainage designed around the run." },
-  { title: "Kitchen run jetted for a letting agent", category: "Maintenance", location: "Guildford, GU1", duration: "Half day", detail: "Annual planned visit across a block of six flats. Fat build-up jetted out, report and photographs issued the same day." },
+  {
+    title: "Tarmac overlay on a St Georges Hill property",
+    category: "Driveways",
+    location: "Weybridge, Surrey",
+    duration: "Private client",
+    detail: "Tarmac overlay project on a property at St Georges Hill, one of the larger private estates in Surrey.",
+  },
+  {
+    title: "Tarmac overlay works at St Johns Lye",
+    category: "Driveways",
+    location: "Woking, Surrey",
+    duration: "Council contract",
+    detail: "Tarmac overlay works carried out at St Johns Lye under contract to the local council in Woking.",
+  },
+  {
+    title: "Manhole renewal for a homeowner",
+    category: "Drainage",
+    location: "Yateley, Hampshire",
+    duration: "Domestic",
+    detail: "Existing manhole taken out and renewed for a private homeowner in Yateley.",
+  },
+  {
+    title: "Drainage and tarmac work for the council",
+    category: "Drainage",
+    location: "Woking, Surrey",
+    duration: "Council contract",
+    detail: "Combined drainage and tarmac work carried out for the local council in Woking.",
+  },
+  {
+    title: "Tarmac work for the council",
+    category: "Driveways",
+    location: "Woking, Surrey",
+    duration: "Council contract",
+    detail: "Tarmac surfacing carried out under contract to the local council in Woking.",
+  },
+  {
+    title: "Knee high fencing at Knaphill",
+    category: "Groundworks",
+    location: "Knaphill, Woking",
+    duration: "Council contract",
+    detail: "Knee high timber fencing installed along a roadside verge at Knaphill for the local council in Woking.",
+  },
+  {
+    title: "Pedestrian railings installed",
+    category: "Groundworks",
+    location: "Farnborough, Hampshire",
+    duration: "Install",
+    detail: "Galvanised pedestrian guard railings supplied and installed on a footway in Farnborough.",
+  },
 ];
 
 /* --- Guides --------------------------------------------------------------
