@@ -1,0 +1,75 @@
+name: Build and deploy to Pages
+
+# The site is generated from build/data.mjs, so it is built here rather than
+# committed. Edit the content, push, and the live site follows a minute later.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # No dependencies to install. The generator is plain Node.
+      - name: Generate the site
+        run: node build/build.mjs
+
+      - name: Check the build produced what we expect
+        run: |
+          test -f index.html
+          test -f CNAME
+          test -f sitemap.xml
+          test -f 404.html
+          count=$(find . -name index.html -not -path './node_modules/*' | wc -l)
+          echo "Generated $count pages"
+          if [ "$count" -lt 30 ]; then
+            echo "Expected at least 30 pages, refusing to deploy a partial build"
+            exit 1
+          fi
+
+      # Only the generated site gets published. The generator, the Supabase
+      # migration and the internal notes must NOT be fetchable from the live
+      # site: CONTENT-TO-CONFIRM.md in particular holds notes about the
+      # business that are not for customers.
+      - name: Strip everything that is not the public site
+        run: |
+          rm -rf build .github supabase node_modules .verify
+          rm -f README.md CONTENT-TO-CONFIRM.md deploy.cmd deploy.sh .gitignore
+          echo "Publishing:"
+          ls -A
+          test ! -f CONTENT-TO-CONFIRM.md
+          test ! -d build
+          test -f index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
