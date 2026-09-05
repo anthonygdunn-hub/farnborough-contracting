@@ -796,3 +796,21 @@ svg { flex: 0 0 auto; }
 .sec-dark .btn-solid { color: #fff; }
 
 .proj-media .ph { color: #b7c9d8; }
+
+/* --- Work cards with no photograph yet --------------------------------
+   The gallery went live before any job photographs existed. A grid of
+   "photograph to follow" boxes reads as an unfinished site, so a card
+   without an image drops the media box entirely and presents as a short
+   case note: category chip, what was wrong, where, how long.
+   ---------------------------------------------------------------------- */
+.proj-text { border-top: 3px solid var(--amber); }
+.proj-text .proj-body { padding: 1.15rem 1.25rem 1.2rem; gap: .55rem; }
+.proj-cat {
+  align-self: flex-start;
+  font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em;
+  text-transform: uppercase; font-weight: 600;
+  color: var(--slate-800); background: var(--paper-3);
+  border-radius: 2px; padding: .3rem .55rem;
+}
+.proj-text h3 { font-size: 1.24rem; }
+.proj-text p { font-size: .96rem; }
